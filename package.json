@@ -1,0 +1,16 @@
+{
+  "name": "r10log-site",
+  "version": "1.0.0",
+  "description": "Website profissional para a empresa de logística R10 Log.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "body-parser": "^1.20.2",
+    "express": "^4.21.2"
+  }
+}
