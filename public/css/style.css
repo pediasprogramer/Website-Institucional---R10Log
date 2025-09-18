@@ -1,4 +1,4 @@
-/* Folha de Estilo Modernizada - R10Log v4.0 (Profissional & Elegante) */
+/* Folha de Estilo Definitiva - R10Log v4.1 (Responsivo & Robusto) */
 
 /* 1. Variáveis Globais & Importações */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
@@ -13,79 +13,184 @@
     --header-height: 80px;
     --border-radius: 12px;
     --shadow-soft: 0 10px 30px rgba(0,0,0,0.1);
-    --transition: 0.3s ease;
+    --transition: 0.4s ease;
 }
 
 /* 2. Reset & Globais */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Poppins', sans-serif; background: var(--cinza-claro); color: var(--cinza-escuro); line-height: 1.6; }
+body { font-family: 'Poppins', sans-serif; background: var(--cinza-claro); color: var(--cinza-escuro); line-height: 1.6; overflow-x: hidden; }
 
 /* 3. Container & Tipografia */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 h1, h2, h3 { font-weight: 800; color: var(--azul-r10); }
-h1 { font-size: 3.5rem; }
-h2 { font-size: 2.8rem; }
-h3 { font-size: 1.8rem; }
-.section { padding: 80px 0; }
-.section-title { text-align: center; margin-bottom: 50px; }
+h1 { font-size: clamp(2.8rem, 5vw + 1rem, 3.8rem); }
+h2 { font-size: clamp(2.2rem, 4vw + 0.5rem, 3rem); }
+h3 { font-size: clamp(1.6rem, 3vw, 2rem); }
+.section { padding: 90px 0; }
+.section-title { text-align: center; margin-bottom: 60px; }
 
-/* 4. Header */
+/* ==========================================================================
+   5. HERO SECTION - REESCRITO PARA GARANTIR FUNCIONAMENTO
+   ========================================================================== */
+
+.hero {
+    position: relative;
+    height: calc(100vh - var(--header-height));
+    width: 100%;
+    display: flex; /* ATIVA O FLEXBOX PARA ALINHAMENTO */
+    align-items: center; /* CENTRALIZA VERTICALMENTE O CONTEÚDO */
+    justify-content: center; /* CENTRALIZA HORIZONTALMENTE O CONTEÚDO */
+    overflow: hidden;
+}
+
+.slideshow-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    transform: scale(1.1);
+}
+
+.slide.active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 1.5s ease-in-out, transform 7s ease-out;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(26,74,147,0.6), rgba(26,74,147,0.8)); /* Gradiente mais suave */
+    z-index: 2;
+}
+
+/* --- AJUSTE PRINCIPAL AQUI --- */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 2rem 1rem; /* Adiciona respiro vertical e horizontal */
+    max-width: 900px;
+    text-align: center; /* FORÇA a centralização de todo o texto e elementos inline dentro dele */
+    display: flex; /* Usa flexbox internamente também */
+    flex-direction: column; /* Organiza os itens em coluna (título, p, botão) */
+    align-items: center; /* Centraliza os itens da coluna no eixo horizontal */
+}
+
+.hero-content h1 {
+    color: var(--branco);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    line-height: 1.2; /* Melhora o espaçamento entre as linhas do título */
+}
+
+.hero-content p {
+    color: var(--branco);
+    opacity: 0.95; /* Texto um pouco mais visível */
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    max-width: 700px;
+    margin-bottom: 2.5rem;
+}
+
+.btn-secondary {
+    background: var(--laranja-acao);
+    color: var(--branco);
+    padding: 18px 35px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-secondary:hover {
+    background: #e66a00;
+    transform: translateY(-3px) scale(1.05); /* Efeito de hover mais evidente */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+
+/* ==========================================================================
+   (O restante do CSS continua aqui...)
+   COLE O RESTO DO SEU CSS (HEADER, FEATURES, STATS, FOOTER, RESPONSIVIDADE) ABAIXO DESTA LINHA.
+   ========================================================================== */
+
+/* 4. Header (e o resto do seu CSS...) */
 .main-header { background: var(--branco); box-shadow: var(--shadow-soft); position: sticky; top: 0; z-index: 1000; }
 .navbar { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); }
-.nav-logo img { height: 75px; transition: var(--transition); }
-.nav-menu { display: flex; gap: 30px; list-style: none; }
-.nav-link { color: var(--cinza-escuro); text-decoration: none; font-weight: 600; transition: var(--transition); }
-.nav-link:hover { color: var(--vermelho-log); }
-.btn-primary { background: var(--vermelho-log); color: var(--branco); padding: 10px 20px; border-radius: var(--border-radius); text-decoration: none; transition: var(--transition); }
-.btn-primary:hover { background: darken(var(--vermelho-log), 10%); }
-
-/* 5. Hero com Slideshow e Texto Original */
-.hero { height: calc(100vh - var(--header-height)); position: relative; overflow: hidden; }
-.slideshow-container { position: relative; height: 100%; }
-.slideshow { position: absolute; width: 100%; height: 100%; }
-.slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
-.slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); }
-.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(26,74,147,0.5), rgba(26,74,147,0.7)); z-index: 1; }
-.hero-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; text-align: center; color: var(--branco); text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-.hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; }
-.hero-content p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem; }
-.btn-secondary { background: var(--laranja-acao); color: var(--branco); padding: 15px 30px; border-radius: var(--border-radius); font-size: 1.2rem; text-decoration: none; transition: var(--transition); }
-.btn-secondary:hover { background: darken(var(--laranja-acao), 10%); }
+.nav-logo img { height: 60px; transition: var(--transition); }
+.nav-menu { display: flex; align-items: center; gap: 35px; list-style: none; }
+.nav-link { color: var(--cinza-escuro); text-decoration: none; font-weight: 600; transition: var(--transition); padding: 8px 0; position: relative; font-size: 1.05rem; }
+.nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--vermelho-log); transition: var(--transition); }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+.nav-link:hover, .nav-link.active { color: var(--vermelho-log); }
+.btn-primary { background: var(--vermelho-log); color: var(--branco); padding: 12px 25px; border-radius: 50px; text-decoration: none; transition: var(--transition); font-weight: 600; box-shadow: 0 5px 15px rgba(230, 36, 45, 0.3); }
+.btn-primary:hover { background: #c11e25; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(230, 36, 45, 0.4); }
+.hamburger { display: none; cursor: pointer; }
+.hamburger .bar { display: block; width: 28px; height: 3px; margin: 6px auto; transition: all 0.3s ease-in-out; background-color: var(--cinza-escuro); border-radius: 2px; }
 
 /* 6. Features Section */
 .features-section { background: var(--branco); }
-.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-.feature-card { background: var(--cinza-claro); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--shadow-soft); text-align: center; transition: var(--transition); }
-.feature-card:hover { transform: translateY(-10px); }
-.feature-icon { width: 80px; margin-bottom: 20px; }
-.feature-card h3 { margin-bottom: 1rem; }
+/* ... (cole o restante do seu CSS aqui) ... */
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.feature-card { background: var(--cinza-claro); padding: 35px; border-radius: var(--border-radius); box-shadow: var(--shadow-soft); text-align: center; transition: var(--transition); border: 1px solid rgba(0,0,0,0.05); }
+.feature-card:hover { transform: translateY(-12px); box-shadow: 0 18px 45px rgba(0,0,0,0.18); }
+.feature-icon { width: 90px; height: 90px; object-fit: contain; margin: 0 auto 25px; }
 
 /* 7. Stats Section */
-.stats-section { background: linear-gradient(to right, var(--azul-r10), var(--vermelho-log)); color: var(--branco); }
-.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
-.counter { font-size: 3rem; display: block; font-weight: 600; }
-.stat-title { font-size: 1.1rem; opacity: 0.9; }
+.stats-section { background: linear-gradient(135deg, var(--azul-r10) 0%, #c11e25 100%); color: var(--branco); padding: 70px 0; text-align: center; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 30px; }
+.stat-item { padding: 20px; background: rgba(255,255,255,0.1); border-radius: var(--border-radius); transition: transform 0.3s ease; }
+.stat-item:hover { transform: translateY(-5px); }
+.counter { font-size: clamp(2.5rem, 6vw, 4rem); display: block; font-weight: 800; }
+.stat-title { font-size: clamp(0.9rem, 2vw, 1.2rem); opacity: 0.9; }
 
 /* 8. Footer */
-.main-footer { background: var(--cinza-escuro); color: var(--branco); padding: 50px 0; }
-.footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-.footer-logo { height: 60px; margin-bottom: 1.5rem; }
-.footer-about p { max-width: 350px; }
-.footer-col h4 { color: var(--branco); margin-bottom: 1.5rem; font-weight: 600; }
+.main-footer { background: var(--cinza-escuro); color: var(--branco); padding: 70px 0 30px; }
+.footer-grid { display: grid; grid-template-columns: 2.5fr 1fr 1.5fr; gap: 40px; }
+.footer-logo { height: 65px; margin-bottom: 1.8rem; }
+.footer-about p { max-width: 400px; opacity: 0.85; }
+.footer-col h4 { color: var(--branco); margin-bottom: 1.8rem; font-weight: 700; }
 .footer-links { list-style: none; }
 .footer-links li { margin-bottom: 1rem; }
-.footer-links a { color: var(--cinza-claro); text-decoration: none; transition: var(--transition); }
-.footer-links a:hover { color: var(--laranja-acao); }
-.footer-bottom { text-align: center; margin-top: 30px; border-top: 1px solid var(--cinza-claro); padding-top: 20px; font-size: 0.9rem; }
+.footer-links a { color: var(--cinza-claro); text-decoration: none; transition: var(--transition); opacity: 0.85; }
+.footer-links a:hover { color: var(--laranja-acao); opacity: 1; transform: translateX(5px); }
+.footer-bottom { text-align: center; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 25px; font-size: 0.85rem; opacity: 0.7; }
 
 /* 9. Responsividade */
+@media (max-width: 992px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 768px) {
-    .features-grid, .stats-grid { grid-template-columns: 1fr; }
-    .nav-menu { flex-direction: column; position: fixed; left: -100%; top: var(--header-height); width: 100%; background: var(--branco); transition: left var(--transition); }
+    .hamburger { display: block; }
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .nav-menu { position: fixed; left: -100%; top: var(--header-height); flex-direction: column; background-color: var(--branco); width: 100%; height: calc(100vh - var(--header-height)); text-align: center; transition: 0.4s ease-in-out; padding-top: 40px; }
     .nav-menu.active { left: 0; }
-    .hamburger { display: block; cursor: pointer; }
-    .hero-content h1 { font-size: 2.5rem; }
-    .hero-content p { font-size: 1rem; }
-    .btn-secondary { padding: 12px 25px; font-size: 1rem; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+}
+@media (max-width: 480px) {
+    .stats-grid { grid-template-columns: 1fr; }
 }

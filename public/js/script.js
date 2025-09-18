@@ -1,62 +1,90 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Inicialização da biblioteca AOS
-    AOS.init({ duration: 1000, once: true });
-
-    // Menu Hamburger
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // 1. Menu Hamburger
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
         });
     }
 
-    // Efeito de Scroll no Header
-    const header = document.querySelector('.main-header');
-    if (header) {
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-    }
-
-    // Slideshow da Seção Hero
-    const slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
-
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.style.opacity = (i === index) ? '1' : '0';
-        });
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
-
+    // 2. Slideshow da Seção Hero com Diagnóstico
+    const slides = document.querySelectorAll(".slide");
     if (slides.length > 0) {
+        let currentSlide = 0;
+        
+        slides.forEach((slide, index) => {
+            const imgSrc = slide.getAttribute('data-src');
+            if (imgSrc) {
+                // Aplica a imagem como background
+                slide.style.backgroundImage = `url('${imgSrc}')`;
+                console.log(`Slide ${index}: Carregando imagem -> ${imgSrc}`);
+            } else {
+                // AVISA NO CONSOLE SE NÃO ENCONTRAR O ATRIBUTO data-src
+                console.error(`ERRO: Slide ${index} não possui o atributo 'data-src' com o caminho da imagem.`);
+                slide.style.backgroundColor = 'var(--cinza-escuro)'; // Fundo de emergência
+            }
+        });
+
+        const showSlide = (index) => {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle("active", i === index);
+            });
+        };
+
+        const nextSlide = () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        };
+
         showSlide(currentSlide);
-        setInterval(nextSlide, 5000); // Troca a cada 5 segundos
+        setInterval(nextSlide, 7000); // Intervalo de 7s para efeito Ken Burns
     }
 
-    // Animação dos Contadores
-    const counters = document.querySelectorAll('.counter');
-    counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        let count = 0;
-        const speed = 200;
+    // 3. Animação de Contagem de Estatísticas
+    // (O código dos contadores e do AOS continua o mesmo, pode colar o anterior aqui)
+    const counters = document.querySelectorAll(".counter");
+    const statsSection = document.querySelector(".stats-section");
 
-        function updateCounter() {
-            const increment = target / speed;
+    const startCounter = (counter) => {
+        const target = +counter.getAttribute("data-target");
+        counter.innerText = '0'; // Começa do zero
+        let count = 0;
+        const duration = 2000;
+        const increment = target / (duration / 16); // ~60fps
+
+        const updateCount = () => {
+            count += increment;
             if (count < target) {
-                count += increment;
-                counter.innerText = Math.floor(count);
-                requestAnimationFrame(updateCounter);
+                counter.innerText = Math.ceil(count);
+                requestAnimationFrame(updateCount);
             } else {
                 counter.innerText = target;
             }
-        }
-        updateCounter();
+        };
+        requestAnimationFrame(updateCount);
+    };
+    
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                counters.forEach(startCounter);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+    
+    // 4. Inicialização do AOS
+    AOS.init({
+        duration: 1200,
+        once: true,
+        offset: 150,
+        easing: 'ease-in-out',
     });
 });
